@@ -34,22 +34,24 @@ int main(int argc, const char *argv[])
     typedef point<3, coord_type> point3_type ;
     typedef simplex<2, 3, coord_type> simplex23_type ;
 
-	srand (13); //initialise random seed = 13
+    srand (13); //initialise random seed = 13
 
-	const int num_trials=1000000;
-	int num_intersects=0;
+    const int num_trials=1000000;
+    int num_intersects=0;
 
-	for(int i=0;i<num_trials;i++)
-	{
-		const simplex23_type triangle_a = make_random_simplex23(100.0),
+    for(int i=0;i<num_trials;i++)
+    {
+        // todo(marke): no reason to declare triangle variables, pass straight to intersect
+        const simplex23_type triangle_a = make_random_simplex23(100.0),
                          triangle_b = make_random_simplex23(100.0) ;
-		if(intersect(triangle_a, triangle_b))
-			num_intersects++;
-	}
+        if(intersect(triangle_a, triangle_b))
+            num_intersects++;
+    }
 
-	std::cout << "Probability of intersection: : " << (coord_type) num_intersects/num_trials << std::endl ;
+    // todo: always prefer C++ casting to C
+    std::cout << "Probability of intersection: : " << (coord_type) num_intersects/num_trials << std::endl ;
 
-	std::cin.ignore();
+    std::cin.ignore();
 
-	return 0 ;
+    return 0 ;
 }
